@@ -2,25 +2,26 @@
 let db;
 
 const request = indexedDB.open("ACHDatabase", 1);
-request.onerror = function(event) {
-    console.log("Database error: " + event.target.errorCode);
-};
-request.onsuccess = function(event) {
-    db = event.target.result;
-};
+request.onerror = function(event) {console.log("Database error: " + event.target.errorCode);};
+request.onsuccess = function(event) { db = event.target.result;};
+
+
+/**********************************************************************
+ * Set up the database
+ * @param event
+ **********************************************************************/
 request.onupgradeneeded = function(event) {
     db = event.target.result;
 
     // Delete existing object stores if they exist
     if (db.objectStoreNames.contains('Files')) {
-        db.deleteObjectStore('Files');
-    }
+        db.deleteObjectStore('Files');}
+
     if (db.objectStoreNames.contains('Batches')) {
-        db.deleteObjectStore('Batches');
-    }
+        db.deleteObjectStore('Batches');}
+
     if (db.objectStoreNames.contains('Transactions')) {
-        db.deleteObjectStore('Transactions');
-    }
+        db.deleteObjectStore('Transactions');}
 
     // Create new object stores
     const filesStore = db.createObjectStore('Files', { keyPath: 'index' });
@@ -31,10 +32,11 @@ request.onupgradeneeded = function(event) {
 };
 
 
-
-
-
-// Store data in DB
+/**********************************************************************
+ * Store data in the database
+ * @param storeName
+ * @param data
+ *********************************************************************/
 function storeInDB(storeName, data) {
     const tx = db.transaction(storeName, "readwrite");
     const store = tx.objectStore(storeName);

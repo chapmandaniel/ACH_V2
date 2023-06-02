@@ -1,5 +1,6 @@
-import {loadAndParseFiles} from "./parser";
-import {outputSummary} from "./summary";
+import {loadAndParseFiles} from "./parser.js";
+import {outputSummary} from "./parser.js";
+
 
 window.onload = function() {
     document.getElementById('openFilesButton').addEventListener('click', function() {
@@ -8,7 +9,7 @@ window.onload = function() {
     });
 
     document.getElementById('summaryButton').addEventListener('click', function() {
-        outputSummary('NachaDB');
+        outputSummary('ACHDatabase');
         console.log('Summary output');
     });
 }
