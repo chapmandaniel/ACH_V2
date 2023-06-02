@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="file" id="nachaFileInput" multiple />
+<button id="openFilesButton">Open NACHA files</button>
+<button id="summaryButton">Output Summary</button>
+
+<script src="js/database.js"></script>
+<script src="js/findAllTransactionsWithBatchId.js"></script>
+
+
+<script>
+
+    import {loadAndParseFiles} from "./js/parser";
+    import {outputSummary} from "./js/summary";
+
+    window.onload = function() {
+        document.getElementById('openFilesButton').addEventListener('click', function() {
+            loadAndParseFiles('nachaFileInput');
+            console.log('Files loaded and parsed');
+        });
+
+        document.getElementById('summaryButton').addEventListener('click', function() {
+            outputSummary('NachaDB');
+            console.log('Summary output');
+        });
+    }
+</script>
+
+</body>
+</html>
